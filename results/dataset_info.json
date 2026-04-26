@@ -1,0 +1,14 @@
+{
+  "dataset_path": "dataset_F33.csv",
+  "n_rows": 74606,
+  "n_features": 1208,
+  "train_rows": 52224,
+  "val_rows": 11191,
+  "test_rows": 11191,
+  "train_time_min": "1989-07-01 07:00:00",
+  "train_time_max": "1996-04-27 01:00:00",
+  "val_time_min": "1996-04-27 02:00:00",
+  "val_time_max": "1997-10-17 12:00:00",
+  "test_time_min": "1997-10-17 13:00:00",
+  "test_time_max": "1999-12-29 04:00:00"
+}
