@@ -32,5 +32,6 @@ Esecuzione
    python mainMLP.py
 
 Nota su .fig
+
 I file .fig vengono salvati come figure matplotlib serializzate con pickle.
 Si possono riaprire in Python, ma non sono .fig nativi di MATLAB.
