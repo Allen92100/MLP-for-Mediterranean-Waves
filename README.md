@@ -4,8 +4,8 @@ A data-driven feed-forward neural network that can predict significant wave heig
 Struttura del progetto
 
 File principali
-- syncwaves.py / sincmare.py   sincronizzazione del dataset mare letto da seawaves/
-- syncwind.py / sincvento.py   concatenazione dei NetCDF ERA5 letti da wind/
+- sincmare.py   sincronizzazione del dataset mare letto da seawaves/
+- sincvento.py   concatenazione dei NetCDF ERA5 letti da wind/
 - crea_dataset_F33.py          costruzione del dataset finale e dei file .npy
 - utils.py                     funzioni di supporto comuni
 - wave_model.py                modello MLP e trainer PyTorch
