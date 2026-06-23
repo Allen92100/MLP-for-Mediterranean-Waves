@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 import torch
 import xarray as xr
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 
 warnings.simplefilter("ignore", pd.errors.PerformanceWarning)
 
@@ -281,24 +283,49 @@ def load_pickled_figure(fig_path):
 
 # Genera la figura con i punti della griglia selezionati attorno alla boa.
 def build_grid_points_figure(points_df, buoy_lat, buoy_lon, title):
-    fig, ax = plt.subplots(figsize=(8, 8))
+
+    fig = plt.figure(figsize=(10,8))
+    ax = plt.axes(projection=ccrs.PlateCarree())
+
+    ax.add_feature(cfeature.LAND, facecolor="lightgray")
+    ax.add_feature(cfeature.OCEAN, facecolor="aliceblue")
+    ax.add_feature(cfeature.COASTLINE, linewidth=1)
+    ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+
     scatter = ax.scatter(
         points_df["lon"],
         points_df["lat"],
         c=points_df["dist_km"],
         cmap="viridis",
         s=60,
-        edgecolor="k",
-        label="Punti griglia",
+        edgecolor="black",
+        transform=ccrs.PlateCarree(),
+        label="Punti ERA5"
     )
+
+    ax.scatter(
+        buoy_lon,
+        buoy_lat,
+        color="red",
+        marker="*",
+        s=250,
+        transform=ccrs.PlateCarree(),
+        label="Boa"
+    )
+
+    ax.set_extent([
+        points_df["lon"].min()-1,
+        points_df["lon"].max()+1,
+        points_df["lat"].min()-1,
+        points_df["lat"].max()+1
+    ])
+
     fig.colorbar(scatter, ax=ax, label="Distanza dalla boa (km)")
-    ax.scatter(buoy_lon, buoy_lat, color="red", marker="*", s=200, label="Boa")
+    ax.gridlines(draw_labels=True)
+
     ax.set_title(title)
-    ax.set_xlabel("Longitudine")
-    ax.set_ylabel("Latitudine")
-    ax.grid(True)
     ax.legend()
-    fig.tight_layout()
+
     return fig
 
 
